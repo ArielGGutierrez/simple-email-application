@@ -5,18 +5,10 @@ namespace EmailServiceAPI.Models
     public class EmailDto
     {
         [Required]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]$", ErrorMessage = "Invalid Email Address")]
-        public string Recipient { get; }
+        public string Recipient { get; set; }
         [Required]
-        public string Subject { get; }
+        public string Subject { get; set; }
         [Required]
-        public string Body { get; }
-
-        public EmailDto(string recipient, string subject, string body)
-        {
-            Recipient = recipient;
-            Subject = subject;
-            Body = body;
-        }
+        public string Body { get; set; }
     }
 }

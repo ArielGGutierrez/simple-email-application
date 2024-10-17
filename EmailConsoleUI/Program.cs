@@ -1,34 +1,74 @@
 ﻿using EmailDLL;
 using Microsoft.Extensions.Configuration;
+using System.Text.RegularExpressions;
 
-// See https://aka.ms/new-console-template for more information
+EmailCredentials credentials = ImportCredentials();
 
-var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false);
-IConfiguration config = configuration.Build();
-EmailCredentials credentials = config.GetSection("Email").Get<EmailCredentials>();
+Console.WriteLine("Is this the correct email account?: " + credentials.Address);
+Console.Write("y/n: ");
 
-bool repeat = true;
+if (!YesOrNo()) // Change Email From
+{
+    Console.Write("New Email: ");
+    credentials.Address = Console.ReadLine();
+
+    Console.Write("Password: ");
+    credentials.Password = Console.ReadLine();
+
+    credentials.Host = "smtp." + credentials.Address.Split('@')[1];
+}
+
+/* Create Email Service */
 Console.WriteLine("Email Service!");
 EmailService service = new EmailService();
 
 do
 {
+    string recipient = "", subject = "", body = "", tryAgain = "";
+
     Console.Write("Recipient: ");
-    string recipient = Console.ReadLine();
+    do
+    {
+        recipient = Console.ReadLine();
+    }
+    while (recipient == "" || !Regex.IsMatch(recipient, @"^[^@\s]+@[^@\s]+\.[^@\s]"));
 
     Console.Write("Subject: ");
-    string subject = Console.ReadLine();
+    do
+    {
+        subject = Console.ReadLine();
+    }
+    while (subject == "");
 
     Console.Write("Body: ");
-    string body = Console.ReadLine();
+    do
+    {
+        body = Console.ReadLine();
+    }
+    while (body == "");
 
     service.SendEmail(credentials, recipient, subject, body);
 
-    Console.WriteLine("Number of Emails Sent: " + service.emailList.Count);
+    Console.WriteLine("Number of Emails Sent: " + service.EmailList.Count);
 
-    Console.WriteLine("Repeat?: Y/N");
-    string input = Console.ReadLine();
+    Console.WriteLine("Repeat?: y/n");
+} while (YesOrNo());
 
-    if (input.ToLower() == "n")
-        repeat = false;
-} while (repeat == true);
+bool YesOrNo()
+{
+    string input = "";
+    do
+    {
+        input = Console.ReadLine().ToLower();
+    } while (input == "" || (input != "y" && input != "n"));
+
+    return input == "y";
+}
+
+EmailCredentials ImportCredentials()
+{
+    var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false);
+    IConfiguration config = configuration.Build();
+    return config.GetSection("Email").Get<EmailCredentials>();
+}
+

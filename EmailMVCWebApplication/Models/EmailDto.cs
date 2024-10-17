@@ -5,7 +5,7 @@ namespace EmailMVCWebApplication.Models
     public class EmailDto
     {
         [Required]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]$", ErrorMessage = "Invalid Email Address")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]", ErrorMessage = "Invalid Email Address")]
         public string Recipient { get; set; }
         [Required]
         public string Subject { get; set; }

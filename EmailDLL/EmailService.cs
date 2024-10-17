@@ -9,20 +9,16 @@ namespace EmailDLL
 {
     public class EmailService
     {
-        public List<Email> emailList;
+        public List<Email> EmailList;
         JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
         public EmailService()
         {
-            emailList = new List<Email>();
+            EmailList = new List<Email>();
 
-            if (File.Exists("EmailList.json"))
-            {
-                emailList = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText("EmailList.json"));
-            }
+            if (File.Exists("EmailList.json"))  
+                EmailList = JsonSerializer.Deserialize<List<Email>>(File.ReadAllText("EmailList.json"));
             else
-            {
-                emailList = new List<Email>();
-            }
+                EmailList = new List<Email>();
         }
 
         public void SendEmail(EmailCredentials credentials, string recipient, string subject, string body)
@@ -30,7 +26,7 @@ namespace EmailDLL
             if (recipient == "" || subject == "" || body == "") return;
 
             Email email = new Email(credentials.Address, recipient, subject, body);
-            emailList.Add(email);
+            EmailList.Add(email);
             SaveEmailList();
 
             EmailWorker worker = new EmailWorker(this, email, credentials);
@@ -40,7 +36,7 @@ namespace EmailDLL
 
         private void SaveEmailList()
         {
-            File.WriteAllText("EmailList.json", JsonSerializer.Serialize(emailList, options));
+            File.WriteAllText("EmailList.json", JsonSerializer.Serialize(EmailList, options));
         }
 
         private class EmailWorker
@@ -62,12 +58,12 @@ namespace EmailDLL
                 mimeMessage.From.Add(MailboxAddress.Parse(Message.Sender));
                 mimeMessage.To.Add(MailboxAddress.Parse(Message.Recipient));
                 mimeMessage.Subject = Message.Subject;
-                mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = Message.Body };
+                mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = Message.Body };
 
                 Message.Status = Email.EmailStatus.Sending;
                 Parent.SaveEmailList();
-                bool success = false;
 
+                bool success = false;
                 using SmtpClient client = new SmtpClient();
                 {
                     for (int i = 0; i < 3; i++)
