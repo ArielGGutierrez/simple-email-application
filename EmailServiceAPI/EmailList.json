@@ -1,0 +1,66 @@
+[
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "API Test",
+    "Body": "I\u0027ve encapsulated the previous program into an API.  Hope this reaches you!",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.15312-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test",
+    "Body": "Will it work?",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1531426-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test",
+    "Body": "Will it work?",
+    "Status": 1,
+    "DateCreated": "2024-10-16T21:35:58.1531548-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test 2",
+    "Body": "Will it work?",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1531644-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test 3",
+    "Body": "Will it work?",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1531748-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test 4",
+    "Body": "Will it work?",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1531891-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "GUI Test 5",
+    "Body": "Will it work?",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1531969-07:00"
+  },
+  {
+    "Sender": "alfred41@ethereal.email",
+    "Recipient": "alfred41@ethereal.email",
+    "Subject": "Postman Test",
+    "Body": "Time to try this from Postman!",
+    "Status": 2,
+    "DateCreated": "2024-10-16T21:35:58.1590178-07:00"
+  }
+]
